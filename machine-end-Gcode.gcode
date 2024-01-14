@@ -35,12 +35,12 @@ M104 S0 ; turn off hotend
 M400 ; wait all motion done
 M17 S
 M17 Z0.4 ; lower z motor current to reduce impact if there is something in the bottom
-{if (max_layer_z + 100.0) < 180}
-    G1 Z{max_layer_z + 100.0} F600
-    G1 Z{max_layer_z +98.0}
+{if (max_layer_z + 100.0) < 150} ; max height 150mm
+    G1 Z{max_layer_z + 100.0} F600 ; F600 = 600 mm/min => 10 mm/s 
+    G1 Z{max_layer_z +98.0} ; purpose of this command is unclear, but because it was there by Bambulab, lets leave it there
 {else}
-    G1 Z180 F600
-    G1 Z180
+    G1 Z150 F600 ; going to max height
+    G1 Z150 ; purpose of this command is unclear, but because it was there by Bambulab, lets leave it there
 {endif}
 M400 P100
 M17 R ; restore z current
